@@ -4,12 +4,13 @@ import './App.css';
 import Search from "./components/Search";
 import AddAppoitment from "./components/AddAppointment";
 import AppointmentInfo from "./components/AppointmentInfo";
+import { order } from "tailwindcss/defaultTheme";
 
 function App() {
 
   let [appointmentList, setAppointmentList] = useState([]);
   let [query, setQuery] = useState("");
-  let [sortBy, setsortBy] = useState("petName");
+  let [sortBy, setSortBy] = useState("petName");
   let [orderBy, setOrderBy] = useState("asc");
 
   const  filteredAppointments = appointmentList.filter(
@@ -47,7 +48,12 @@ function App() {
       </h1>
       <AddAppoitment /> 
       <Search query={query}
-        onQueryChange= { myQuery => setQuery(myQuery)} />
+        onQueryChange= { myQuery => setQuery(myQuery)} 
+        orderBy = {orderBy}
+        onOrderByChange = {mySort => setOrderBy(mySort)}
+        sortBy = {sortBy}
+        onSortByChange = {mySort => setSortBy(mySort)}
+      />
       <ul className="divide-y divide-gray-200">
         { filteredAppointments
           .map( appointment => (
